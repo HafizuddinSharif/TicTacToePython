@@ -1,10 +1,9 @@
 # TO DISPLAY THE GAME BOARD
 def display_board(marker_positions):
     for x in range(3):
-        print("-------------")
-        print("| " + marker_positions[x * 3] + " | " + marker_positions[(x * 3) + 1] + " | " + marker_positions[
-            (x * 3) + 2] + " |")
-    print("-------------")
+        if x != 0:
+            print("-------------")
+        print("  " + marker_positions[x * 3] + " | " + marker_positions[(x * 3) + 1] + " | " + marker_positions[(x * 3) + 2] + "  ")
 
 
 # TO INSERT THE SYMBOL IN THE POSITIONS
@@ -25,7 +24,7 @@ def is_win(player, marker_positions):
     # HORIZONTAL
     for x in range(3):
         if marker_positions[x * 3] == player:
-            if marker_positions[x * 3 + 1] == player and marker_positions[x * 3 + 1] == player:
+            if marker_positions[x * 3 + 1] == player and marker_positions[x * 3 + 2] == player:
                 return True
 
     # VERTICAL
@@ -62,7 +61,7 @@ def start_game(start_first, initial_positions):
     while not won:
         display_board(current_positions)
 
-        coordinate = int(input("Please type in your coordinate:\n"))
+        coordinate = int(input(turn + " player, please type in your coordinate:\n"))
         insert_symbol(turn, coordinate, current_positions)
 
         if is_win(turn, current_positions):
